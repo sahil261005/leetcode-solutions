@@ -1,0 +1,33 @@
+from typing import List, Optional
+from collections import deque
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if root is None:
+            return []  # Return an empty list instead of None
+        
+        queue = deque([root])
+        ans = []
+        
+        while queue:
+            level = []
+            n = len(queue)
+            
+            for _ in range(n):
+                node = queue.popleft()
+                level.append(node.val)
+
+                if node.left:  # No parentheses needed
+                    queue.append(node.left)
+                if node.right:  # No parentheses needed
+                    queue.append(node.right)
+            
+            ans.append(level)
+        
+        return ans
