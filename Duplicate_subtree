@@ -1,0 +1,35 @@
+from typing import Optional, List
+from collections import defaultdict
+
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val: int, left: 'TreeNode' = None, right: 'TreeNode' = None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    def findDuplicateSubtrees(self, root: Optional[TreeNode]) -> List[TreeNode]:
+        subtree_map = defaultdict(int)
+        result = []
+        
+        def dfs(node: Optional[TreeNode]) -> str:
+            if not node:
+                return "#"
+            
+            
+            left_serial = dfs(node.left)
+            right_serial = dfs(node.right)
+            subtree_serial = f"{node.val},{left_serial},{right_serial}"
+            
+            
+            subtree_map[subtree_serial] += 1
+            
+            
+            if subtree_map[subtree_serial] == 2:
+                result.append(node)
+            
+            return subtree_serial
+        
+        dfs(root)
+        return result
