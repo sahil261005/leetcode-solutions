@@ -1,0 +1,31 @@
+from typing import Optional
+
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val: int, left: 'TreeNode' = None, right: 'TreeNode' = None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    def convertBST(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        total_sum = 0  
+        
+        def reverse_inorder(node: Optional[TreeNode]):
+            nonlocal total_sum  
+            
+            if not node:
+                return
+            
+           
+            reverse_inorder(node.right)
+            
+           
+            total_sum += node.val #MOst important line
+            node.val = total_sum # Update the node's value with the total sum so that it becomes the new value 
+            
+           
+            reverse_inorder(node.left)
+        
+        reverse_inorder(root)
+        return root
