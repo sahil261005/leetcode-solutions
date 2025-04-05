@@ -23,7 +23,7 @@ class Solution:
             for i in range(level_size):
                 node = queue.popleft()
                 
-                # If it's the last node in the current level, add to result
+                
                 if i == level_size - 1:
                     result.append(node.val)
                 
