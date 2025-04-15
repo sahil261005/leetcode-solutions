@@ -1,4 +1,4 @@
-from collections import Counter
+from collections import Counte
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         n = len(nums)
