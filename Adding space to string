@@ -12,5 +12,5 @@ class Solution:
                 t[i+j+1]=s[i]
                 j+=1
             i+=1
-        return "".join(t)
+        return "".join(t
         
