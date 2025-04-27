@@ -1,0 +1,13 @@
+class Solution:
+    def findChampion(self, n: int, edges: List[List[int]]) -> int:
+        incoming = [0] * n
+        for src, dist in edges:
+            incoming[dist] += 1
+        
+        champion = []
+        for i, incoming_count in enumerate(incoming):    
+            if not incoming_count:
+                champion.append(i)
+        if len(champion) > 1:
+            return -1
+        return champion[0]
