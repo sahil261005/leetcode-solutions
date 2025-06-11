@@ -1,0 +1,12 @@
+from typing import List
+
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        goal = len(nums) - 1  # Set the goal to the last index
+
+        # Move backward through the list
+        for i in range(len(nums) - 1, -1, -1):
+            if i + nums[i] >= goal:
+                goal = i  # We can reach the goal from here, so update the goal
+
+        return goal == 0  # If goal moved back to index 0, we can reach the end
