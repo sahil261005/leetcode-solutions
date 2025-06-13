@@ -1,4 +1,4 @@
-# Binary tree right side view
+
 from typing import Optional, List
 from collections import deque
 
