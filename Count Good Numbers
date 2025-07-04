@@ -1,0 +1,19 @@
+from math import ceil
+
+class Solution:
+    def countGoodNumbers(self, n: int) -> int:
+        MOD = 10**9 + 7
+
+        def pow(x, n):
+            res = 1
+            while n:
+                if n % 2:
+                    res = (res * x) % MOD
+                x = (x * x) % MOD
+                n //= 2
+            return res
+
+        even = ceil(n / 2)  # positions: 0, 2, 4, ...
+        odd = n // 2        # positions: 1, 3, 5, ...
+
+        return (pow(5, even) * pow(4, odd)) % MOD
