@@ -1,0 +1,17 @@
+class Solution:
+    def jump(self, nums: List[int]) -> int:
+            farthest_jump = 0
+            jump = 0
+            curr_jump = 0
+
+            for i in range(len(nums)-1):
+                # Find the Farthest Jump
+                farthest_jump = max(farthest_jump, i + nums[i])
+
+                # it means we have made the jump 
+                if i == curr_jump:
+                    # Point curr jump to the farthest jump
+                    curr_jump = farthest_jump
+                    jump += 1
+
+            return jump
