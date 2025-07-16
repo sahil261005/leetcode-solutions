@@ -1,0 +1,23 @@
+class Solution:
+    def numberOfSubarrays(self, nums: List[int], k: int) -> int:
+        res = 0         # final answer: how many subarrays found
+        odd = 0         # how many odd numbers in current window
+        l = 0           # left pointer of the window
+        m = 0           # another pointer used to count even prefixes
+
+        for r in range(len(nums)):     # r is the right pointer
+            if nums[r] % 2 == 1:       # if number is odd
+                odd += 1               # increase odd count
+
+            while odd > k:             # if too many odd numbers
+                if nums[l] % 2 == 1:   # if left is odd
+                    odd -= 1          # remove it
+                l += 1                # shrink window
+                m = l                 # move m to l
+
+            if odd == k:              # if exactly k odd numbers
+                while nums[m] % 2 == 0:  # skip all even numbers
+                    m += 1
+                res += (m - l + 1)    # count subarrays starting from l to m
+
+        return res
