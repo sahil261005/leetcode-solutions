@@ -1,0 +1,19 @@
+from collections import defaultdict
+from typing import List
+
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        n = len(nums)
+        mpp = defaultdict(int)
+        preSum = 0
+        cnt = 0
+
+        mpp[0] = 1  # Initialize prefix sum 0 with frequency 1
+
+        for i in range(n):
+            preSum += nums[i]
+            remove = preSum - k
+            cnt += mpp[remove]
+            mpp[preSum] += 1
+
+        return cnt
