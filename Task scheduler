@@ -1,0 +1,31 @@
+from collections import Counter, deque
+import heapq
+
+class Solution:
+    def leastInterval(self, tasks: List[str], n: int) -> int:
+        if n == 0:
+            return len(tasks)
+
+        count = Counter(tasks)
+        # convert to max heap via negative counts
+        maxHeap = [-cnt for cnt in count.values()]
+        heapq.heapify(maxHeap)
+
+        time = 0
+        queue = deque()  # stores pairs (count, available_time)
+
+        while maxHeap or queue:
+            time += 1
+            if maxHeap:
+                cnt = heapq.heappop(maxHeap)
+                cnt += 1  # decrement the task count
+                if cnt != 0:
+                    # schedule next availability after cooldown
+                    queue.append((cnt, time + n))
+
+            # if any task in queue is ready, push back into heap
+            if queue and queue[0][1] == time:
+                cnt_ready, _ = queue.popleft()
+                heapq.heappush(maxHeap, cnt_ready)
+
+        return time
