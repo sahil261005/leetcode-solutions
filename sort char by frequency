@@ -1,0 +1,17 @@
+class Solution:
+    def frequencySort(self, s: str) -> str:
+        # Step 1: Count frequency of each character
+        count = Counter(s)
+
+        # Step 2: Bucket sort using defaultdict
+        freq_map = defaultdict(list)
+        for char, freq in count.items():
+            freq_map[freq].append(char)
+
+        # Step 3: Build result string from high to low frequency
+        result = []
+        for freq in sorted(freq_map.keys(), reverse=True):
+            for char in freq_map[freq]:
+                result.append(char * freq)
+
+        return ''.join(result)
