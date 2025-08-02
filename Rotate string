@@ -1,0 +1,11 @@
+class Solution:
+    def rotateString(self, s: str, goal: str) -> bool:
+        # Step 1: Check if lengths are unequal – can't be rotations
+        if len(s) != len(goal):
+            return False
+        
+        # Step 2: Concatenate s with itself to include all rotations
+        doubled = s + s
+
+        # Step 3: Check if goal is a substring of the doubled string
+        return goal in doubled
