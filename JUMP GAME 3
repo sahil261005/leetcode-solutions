@@ -1,0 +1,22 @@
+class Solution:
+    def canReach(self, arr, start):
+        n = len(arr)
+        queue = deque([start])
+        visited = set()
+
+        while queue:
+            i = queue.popleft()
+
+            if i in visited:
+                continue
+            if arr[i] == 0:
+                return True
+
+            visited.add(i)
+
+            if i + arr[i] < n:
+                queue.append(i + arr[i])
+            if i - arr[i] >= 0:
+                queue.append(i - arr[i])
+
+        return False
