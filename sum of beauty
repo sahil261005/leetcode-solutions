@@ -1,0 +1,23 @@
+class Solution:
+    def beautySum(self, s: str) -> int:
+        n = len(s)
+        total_beauty = 0
+
+        for i in range(n):
+            freq = [0] * 26
+
+            for j in range(i, n):
+                idx = ord(s[j]) - ord('a')
+                freq[idx] += 1
+
+                max_freq = 0
+                min_freq = float('inf')
+
+                for count in freq:
+                    if count > 0:
+                        max_freq = max(max_freq, count)
+                        min_freq = min(min_freq, count)
+
+                total_beauty += max_freq - min_freq
+
+        return total_beauty
