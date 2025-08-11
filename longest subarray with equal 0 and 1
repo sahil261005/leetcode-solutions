@@ -1,0 +1,12 @@
+def findMaxLength(nums):
+    prefix = 0
+    first_seen = {0: -1}
+    max_len = 0
+
+    for i, num in enumerate(nums):
+        prefix += 1 if num == 1 else -1  # treat 0 as -1
+        if prefix in first_seen:
+            max_len = max(max_len, i - first_seen[prefix])
+        else:
+            first_seen[prefix] = i
+    return max_len
