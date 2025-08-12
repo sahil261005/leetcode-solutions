@@ -1,0 +1,31 @@
+  # Step 1: Sort the array
+    nums.sort()
+    n = len(nums)
+    
+    # Step 2: Initialize min_diff and closest_sum
+    min_diff = float('inf')
+    closest_sum = 0
+    
+    # Step 3: Loop through each number as the first element
+    for i in range(n - 2):  # last two elements will be handled by pointers
+        left, right = i + 1, n - 1
+        
+        while left < right:
+            curr_sum = nums[i] + nums[left] + nums[right]
+            diff = abs(curr_sum - target)
+            
+            # Update if we found a closer sum
+            if diff < min_diff:
+                min_diff = diff
+                closest_sum = curr_sum
+            
+            # Move pointers
+            if curr_sum < target:
+                left += 1  # increase sum
+            elif curr_sum > target:
+                right -= 1  # decrease sum
+            else:
+                # Exact match found — can't get closer
+                return target
+    
+    return closest_sum
