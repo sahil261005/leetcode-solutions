@@ -1,0 +1,13 @@
+  open_count = 0
+    add_count = 0
+
+    for ch in s:
+        if ch == '(':
+            open_count += 1
+        else:  # ch == ')'
+            if open_count > 0:
+                open_count -= 1  # match with an open bracket
+            else:
+                add_count += 1  # need an extra '('
+
+    return open_count + add_count
